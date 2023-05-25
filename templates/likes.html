@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>论坛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 样式-->
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+<!--    <link rel="stylesheet" href="css/bootstrap-responsive.css">-->
+<!--    <link rel="stylesheet" href="css/prettyPhoto.css"/>-->
+<!--    <link rel="stylesheet" href="css/flexslider.css"/>-->
+    <link rel="stylesheet" href="/static/css/custom-styles.css">
+
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/static/css/style-ie.css"/>
+    <![endif]-->
+
+    <!-- Favicons图标 -->
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-touch-icon-114x114.png">
+
+    <!-- js -->
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/jquery.flexslider.js"></script>
+    <script src="/static/js/jquery.custom.js"></script>
+</head>
+
+<body class="home">
+<!-- 最上方两个条子 -->
+<div class="color-bar-1"></div>
+<div class="color-bar-2 color-bg"></div>
+<div class="row">
+
+<div class="row clearfix">
+    <ul class="gallery-post-grid holder">
+        {% for vo in favorite_list %}
+        <li class="span3 gallery-item" data-id="id-1" data-type="illustration">
+            <a href="/single/{{ vo.c_tid }}"><img src="{{ vo.c_tphoto }}" alt="Gallery"></a>
+            <span class="project-details"><a href="/single/{{ vo.c_tid }}">{{ vo.c_ttitle }}</a>{{ vo.c_tintroduce }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
