@@ -1,87 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>我的收藏</title>
-    <style>
-        html {
-            background-color: #f9f9f9;
-        }
-
-
-        h1 {
-            background-color: blue;
-            border-width: thick;
-        }
-
-        .GreenDiv {
-            background-color: Green;
-        }
-
-        /** 更改每行的颜色**/
-
-        /**table.tr{background-color:blue;}**/
-
-        table tr:nth-child(odd) {
-            background: #ccc;
-        }
-
-        /*修改表格的样式*/
-
-        table {
-            width: 90%;
-            background: #ccc;
-            margin: 10px;
-            border-collapse: collapse;
-        }
-
-        /**th,td{height: 25px;line-height: 25px;text-align: center;border: 1px solid #ccc;}**/
-
-        th, td {
-            height: 25px;
-            line-height: 25px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
-
-        th {
-            background: #eee;
-            font-weight: normal;
-        }
-
-        tr {
-            background: #fff;
-        }
-
-        tr:hover {
-            background: #cc0;
-        }
-
-        td a {
-            color: #06f;
-            text-decoration: none;
-        }
-
-        td a:hover {
-            color: #06f;
-            text-decoration: underline;
-        }
-
-
-    </style>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 样式-->
+    <!-- CSS -->
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
-<!--    <link rel="stylesheet" href="css/bootstrap-responsive.css">-->
-<!--    <link rel="stylesheet" href="css/prettyPhoto.css"/>-->
-<!--    <link rel="stylesheet" href="css/flexslider.css"/>-->
+    <link rel="stylesheet" href="/static/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="/static/css/prettyPhoto.css"/>
     <link rel="stylesheet" href="/static/css/custom-styles.css">
 
     <!--[if lt IE 9]>
-    <link rel="stylesheet" href="/static/css/style-ie.css"/>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" href="css/style-ie.css"/>
     <![endif]-->
 
     <!-- Favicons图标 -->
@@ -90,18 +23,22 @@
     <link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-touch-icon-114x114.png">
 
-    <!-- js -->
+    <!-- JS -->
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/jquery.easing.1.3.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/jquery.prettyPhoto.js"></script>
-    <script src="/static/js/jquery.flexslider.js"></script>
+    <script src="/static/js/jquery.quicksand.js"></script>
     <script src="/static/js/jquery.custom.js"></script>
 
-    <div class="color-bar-1"></div>
-    <div class="color-bar-2 color-bg"></div>
+</head>
+
+<body>
+<!-- 最上面的两条线装饰 -->
+<div class="color-bar-1"></div>
+<div class="color-bar-2 color-bg"></div>
 
     <h3 style="text-align: center">收藏夹</h3>
-
     <div style="position:relative;left: 250px;">
         <!-- logo，搜索框，导航栏 -->
         <div class="row header">
@@ -129,23 +66,52 @@
                                 <li><a href="/all-4-0-0">幻想</a></li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">个人中心<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            <li><a href="/edit-pwd">修改密码</a></li>
+                                <li><a href="/edit-inform">修改个人信息</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="/login">退出</a></li>
+
                     </ul>
                 </div>
+                <!-- Mobile Nav -->
+            <form action="#" id="mobile-nav" class="visible-phone">
+                <div class="mobile-nav-select">
+                    <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+                        <option value="">导航栏</option>
+                        <option value="index.htm">主页</option>
+                        <option value="index.htm">- 全显示</option>
+                        <option value="index-gallery.htm">- 只显示帖子列表</option>
+                        <option value="index-slider.htm">- 只显示轮播图</option>
+                        <option value="features.htm">选项1</option>
+                        <option value="page-full-width.htm">页面</option>
+                        <option value="page-full-width.htm">- 全显示</option>
+                        <option value="page-right-sidebar.htm">- 右边</option>
+                        <option value="page-left-sidebar.htm">- 左边</option>
+                        <option value="page-double-sidebar.htm">- 双边</option>
+                        <option value="page-contact.htm">联系我们</option>
+                    </select>
+                </div>
+            </form>
+
             </div>
+
         </div>
+
     </div>
-
-</head>
-<body>
-
+</div>
+</div>
 
 <div class="container"; >
 
-    <!-- 3个结束 -->
-
     <div style="border-bottom: 1px solid #e7e7e7;padding-bottom: 12px;zoom: 1;position: relative;left: 150px;right: 250px;">
         <div style="position: relative;margin-right: 10px;cursor: pointer;float: left;">
-            <img src="{photo}" style="width:220px;height:150px;">
+            <a href="/single/{id}"><img src="{photo}" style="width:220px;height:150px;"></a>
             <div style="position: absolute;width: 100%;height: 100%;top: 0;right: 0;z-index:999;">
             </div>
         </div>
@@ -340,5 +306,7 @@
     repeat.repeatInnerHTML('.container', likes)
 
 </script>
+
 </body>
+
 </html>
