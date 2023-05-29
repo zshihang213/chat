@@ -60,8 +60,31 @@
         });
 
     </script>
+    <script type="text/javascript">
+        function downloadImage() {
 
 
+        // 通过选择器获取img元素
+            const img = document.getElementById("gen");
+            // 将图片的src属性作为URL地址
+            const url = img.src;
+            const a = document.createElement('a');
+            const event = new MouseEvent('click');
+            a.download = url; // '下载图片名称'
+        a.href = url;
+        a.dispatchEvent(event) ;//
+    }
+    </script>
+    <script>
+    $("#generate").click(function(){
+        const prompt = $("#prompt").val();
+        $.post("post.php", {"data": prompt}, function(info){    //info 为post.php页面返回的数据$(document).ready(function(){
+            const url=info.t;
+            $("#gen").attribute(src,url);
+    });
+	}, "json");
+    });
+    </script>
     <style>
         .top10 {
             font-size: 15px;
@@ -86,7 +109,7 @@
 
         <!-- 左上角图片和logo -->
         <div class="span5 logo" style="width: 250px">
-            <h5 style="font-size: 28px">一 个 论 坛</h5>
+            <h5 style="font-size: 28px">C h a t . J P G</h5>
         </div>
 
         <!-- 导航栏 -->
@@ -133,8 +156,17 @@
                         <option value="">导航栏</option>
                         <option value="/home">主页</option>
                         <option value="/publish">发帖</option>
-                        <option value="/all-0-0-0">看帖</option>
-                        <option value="/all-0-0-0">- 全部帖子</option>
+                        <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="page-full-width.htm">看帖 <b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/all-0-0-0">全部帖子</a></li>
+                            <li><a href="/all-1-0-0">风景</a></li>
+                            <li><a href="/all-2-0-0">人物</a></li>
+                            <li><a href="/all-3-0-0">动物</a></li>
+                            <li><a href="/all-4-0-0">幻想</a></li>
+                        </ul>
+                    </li>
                         {% for kind in kinds %}
                             <option value="/all-{{ kind.id }}-0-0">- {{ kind.k_name }}</option>
                         {% endfor %}
@@ -152,24 +184,27 @@
     </div>
     <!-- 3个结束 -->
 
-    <!-- top 10公告, 介绍 -->
+    <!-- 介绍 -->
     <div class="row headline">
 
-        <!-- top 10公告 -->
+        <!-- 生成区 -->
         <div class="span8">
-            <h3 style="margin-top: -40px;"> &nbsp;&nbsp;TOP 10 公告<br/></h3>
-            {% for a in a_list %}
-                <a href="/single-an-{{ a.a_id }}" class="top10">{{ a.a_title }}</a>
-            {% endfor %}
-            {#            <a class="top10">第一名：重磅！Google推出了Python编辑器，惊呆了小伙伴......</a>#}
+            <h3 style="margin-top: -40px;"> 生成区<br/></h3>
+
+                <img id = "gen" decoding="async" src="../static/img/光晕4.jpg" class="mx-auto d-block " style="width:50%;border-style: groove;"
+                    alt="null">
+
         </div>
 
         <!-- 指导 -->
         <div class="span4">
-            <h3>欢迎来到一个论坛 <br/>
-                这是指南</h3>
-            <p class="lead">tip：左边是top10公告，下面是按时间排序的帖子。</p>
-            <p>左边是top10公告，下面是按时间排序的帖子。请继续看。</p>
+            <h3>欢迎来到Chat.JPG <br/>
+                这是生成页，你可以发挥你的创意</h3>
+            <p class="lead">tip：请输入想要生成的内容</p>
+            <p>（例如：骑着马的宇航员）</p>
+            <button id="generate" class="btn btn-large" type="submit">尝试生成</button>
+            <button class="btn btn-large" type="submit" onclick="downloadImage()">下载</button>
+            <input id="prompt" class="input-xxlarge" type="text" class="form-control">
         </div>
     </div>
     <!-- top 10结束 -->
@@ -211,13 +246,11 @@
         <div style="margin-top: 30px" class="row">
             <div class="span12 footer-col footer-sub">
                 <div class="row no-margin">
-                    <div class="span6"><span class="left">一个论坛</span>
+                    <div class="span6"><span class="left">Chat.JPG</span>
                     </div>
                     <div class="span6">
                             <span class="right">
-                            <a href="#">主页</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">选项1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">页面</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">联系我们</a>
+                            <a href="home">主页</a>&nbsp;&nbsp;
                             </span>
                     </div>
                 </div>

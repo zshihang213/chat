@@ -88,7 +88,6 @@
                                                             size="16" type="description" name="description"
                                                             placeholder={{ user.description }}>
                 </div>
-                </form>
                 <div style="width: 300px;padding: 20px;margin: 0 auto;">
                     <button id="login-button" style="margin-right: 20px;margin-left: 20px;" class="btn btn-large"
                             type="submit">提交
@@ -98,6 +97,7 @@
                             type="button">取消
                     </button>
                 </div>
+            </form>
         </div>
     </div>
 </div>
@@ -133,11 +133,10 @@
     $('#login-button').click(function () {
        var uid = $('#uid').val();
        var pwd = $('#pwd').val();
-       var description = $('#description').val();
        $.ajax({
             url: window.location.href,
             type: "POST",
-            data: {'type': 'login','uid': uid, 'pwd': pwd, 'description': description},
+            data: {'type': 'login','uid': uid, 'pwd': pwd},
             beforeSend: function (xhr, settings) {
                 xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");    // csrf
             },

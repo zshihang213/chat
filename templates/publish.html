@@ -48,7 +48,7 @@
         <tbody>
 
         <tr>
-            <th>帖子标题</th>
+            <th>作品标题</th>
             <td>
                 <label>
                     <input required id="topic_title" maxlength="80" name="t_title" size="60" type="text">
@@ -57,7 +57,7 @@
         </tr>
 
         <tr>
-            <th valign="top">帖子简介</th>
+            <th valign="top">作品概要</th>
             <td>
                 <label>
                     <input required id="topic_introduce" maxlength="80" name="t_introduce" size="60" type="text">
@@ -65,7 +65,7 @@
             </td>
         </tr>
         <tr>
-            <th valign="top">帖子内容</th>
+            <th valign="top">生成文本</th>
             <td>
                 <div class="body_count">
                     <textarea style="width: 700px;" cols="62" rows="20" name="t_content"></textarea>
@@ -74,7 +74,7 @@
         </tr>
 
         <tr>
-            <th>封面图</th>
+            <th>作品文件</th>
             <td>
 
                 <div>
@@ -91,7 +91,10 @@
                         {% for kind in kinds %}
                             <option value="{{ kind.id }}">{{ kind.k_name }}</option>
                         {% endfor %}
-                        <option>搞笑</option>
+                        <option>风景</option>
+                        <option>人物</option>
+                        <option>动物</option>
+                        <option>幻想</option>
                     </select>
                 </div>
             </td>
@@ -114,13 +117,11 @@
         <div style="margin-top: 30px" class="row">
             <div class="span12 footer-col footer-sub">
                 <div class="row no-margin">
-                    <div class="span6"><span class="left">一个论坛</span>
+                    <div class="span6"><span class="left">Chat.JPG</span>
                     </div>
                     <div class="span6">
                             <span class="right">
-                            <a href="#">主页</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">选项1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">页面</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">联系我们</a>
+                            <a href="http://127.0.0.1:8000/home/">主页</a>&nbsp;&nbsp;
                             </span>
                     </div>
                 </div>
