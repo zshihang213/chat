@@ -76,14 +76,14 @@
     }
     </script>
     <script>
-    $("#generate").click(function(){
-        const prompt = $("#prompt").val();
-        $.post("post.php", {"data": prompt}, function(info){    //info 为post.php页面返回的数据$(document).ready(function(){
-            const url=info.t;
-            $("#gen").attribute(src,url);
-    });
-	}, "json");
-    });
+    $("#generate").click(function() {
+        var prompt =  $('#prompt').val();
+        $.ajax({
+            type: "GET",
+            url: window.location.href,
+            data: prompt,
+        });
+    }
     </script>
     <style>
         .top10 {
@@ -202,9 +202,14 @@
                 这是生成页，你可以发挥你的创意</h3>
             <p class="lead">tip：请输入想要生成的内容</p>
             <p>（例如：骑着马的宇航员）</p>
-            <button id="generate" class="btn btn-large" type="submit">尝试生成</button>
-            <button class="btn btn-large" type="submit" onclick="downloadImage()">下载</button>
-            <input id="prompt" class="input-xxlarge" type="text" class="form-control">
+            <form action="#" method="post" name="register">
+                {% csrf_token %}
+                <button id="generate" class="btn btn-large" type="submit">尝试生成</button>
+                <button class="btn btn-large" type="submit" onclick="downloadImage()">下载</button>
+                <input id="prompt" name="prompt" type="prompt"
+                       class="input-xxlarge" class="form-control">
+                <p>图片链接{{ image_url }}</p>
+            </form>
         </div>
     </div>
     <!-- top 10结束 -->

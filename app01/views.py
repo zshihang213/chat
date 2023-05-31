@@ -4,6 +4,12 @@ from app01 import models
 from app01.models import CltNovel
 import json
 
+import os
+import openai
+import requests as req
+from PIL import Image
+from io import BytesIO
+
 
 # Create your views here.
 
@@ -43,6 +49,24 @@ def home(request):
         response['kinds'] = kinds
 
         return render(request, 'home.html', response)
+    if request.method == 'POST':
+        openai.api_key = "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"
+        text = request.POST.get('prompt')
+        print(text)
+        response = openai.Image.create(
+            prompt=text,
+            n=1,
+            size="512x512"
+        )
+
+        print(response)
+        image_url = response['data'][0]['url']
+        print(image_url)
+
+        response = req.get(image_url)
+        image = Image.open(BytesIO(response.content))
+        image.show()
+        return render(request, 'home.html', {'image_url': image_url})
 
 
 # 所有帖子
@@ -343,7 +367,6 @@ def edit_pwd(request):
             response['status'] = False
             response['msg'] = '原密码错误'
             return HttpResponse(json.dumps(response))
-            pass
 
 # 修改个人信息页面
 def edit_inform(request):
