@@ -50,7 +50,7 @@ def home(request):
 
         return render(request, 'home.html', response)
     if request.method == 'POST':
-        openai.api_key = "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"
+        openai.api_key = "删掉"
         text = request.POST.get('prompt')
         print(text)
         response = openai.Image.create(
