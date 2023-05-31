@@ -31,6 +31,7 @@
     <script src="/static/js/jquery.quicksand.js"></script>
     <script src="/static/js/jquery.custom.js"></script>
 
+
 </head>
 
 <body>
@@ -46,7 +47,7 @@
         <!-- 左上角图片和logo -->
         <div class="span5 logo" style="width: 250px">
             <!--            <a href="index.htm"><img src="img/piccolo-logo.png" alt=""/></a>-->
-            <h5 style="font-size: 28px">Chat.JPG</h5>
+            <h5 style="font-size: 28px">一 个 论 坛</h5>
         </div>
 
         <!-- 搜索框-->
@@ -70,15 +71,14 @@
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/all-0-0-0">全部帖子</a></li>
-                            <li><a href="/all-1-0-0">风景</a></li>
-                            <li><a href="/all-2-0-0">人物</a></li>
-                            <li><a href="/all-3-0-0">动物</a></li>
-                            <li><a href="/all-4-0-0">幻想</a></li>
+                            <li><a href="/all-1-0-0">军事</a></li>
+                            <li><a href="/all-2-0-0">美食</a></li>
+                            <li><a href="/all-3-0-0">汽车</a></li>
+                            <li><a href="/all-4-0-0">IT</a></li>
                         </ul>
                     </li>
                     {% if uid %}
                         <li><a href="/likes">收藏夹</a></li>
-                        <li><a>{{ uid }}欢迎你</a></li>
                         <li><a href="/login">退出</a></li>
                     {% else %}
                         <li><a href="/login">登录</a></li>
@@ -154,8 +154,7 @@
                     {% for t in topics %}
                         <li class="span3 gallery-item" data-id="id-1" data-type="illustration">
                             <a href="/single/{{ t.id }}"><img src="{{ t.t_photo }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="/single/{{ t.id }}">{{ t.t_title }}</a>{{ t.t_introduce }}<a style="float: right;font-size: 16px;font-weight: bold" onclick="saveToLikes({{ t.id }},'{{ t.t_photo}}',{{ t.t_content }},{{ t.t_title}},'{{ t.t_introduce}}')">收藏</a></span>
-
+                            <span class="project-details"><a href="/single/{{ t.id }}">{{ t.t_title }}</a>{{ t.t_introduce }}</span>
                         </li>
                     {% endfor %}
 
@@ -186,11 +185,13 @@
         <div style="margin-top: 30px" class="row">
             <div class="span12 footer-col footer-sub">
                 <div class="row no-margin">
-                    <div class="span6"><span class="left">Chat.JPG</span>
+                    <div class="span6"><span class="left">一个论坛</span>
                     </div>
                     <div class="span6">
                             <span class="right">
-                            <a href="home">主页</a>&nbsp;&nbsp;
+                            <a href="/home">主页</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="/publish">发帖</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
+                                    href="#">页面</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
+                                    href="#">联系我们</a>
                             </span>
                     </div>
                 </div>
@@ -205,20 +206,3 @@
 <div id="toTop" class="hidden-phone hidden-tablet">回到顶端</div>
 
 
-<script>
-    let likesArr = JSON.parse(window.localStorage.getItem("Likes")) || []
-    function saveToLikes(...arguments){
-        {#window.localStorage.getItem('Likes')#}
-        alert('收藏成功!')
-        likesArr.push({
-                id:arguments[0],
-                photo:arguments[1],
-                content:arguments[2],
-                title:arguments[3],
-                introduce:arguments[4]
-            })
-        window.localStorage.setItem('Likes',JSON.stringify(likesArr))
-    }
-</script>
-</body>
-</html>

@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^single/(?P<tid>\d+)/', views.single),  # 单个帖子
     url(r'^edit-pwd/', views.edit_pwd),  # 修改密码
     url(r'^edit-inform/', views.edit_inform),  # 修改个人信息
-    url(r'^my-admin/', views.admin),  # 修改密码
+    url(r'^my-admin/', views.admin),  # 管理员登录
     url(r'^announcement/', views.announcement),  # 公告管理
     url(r'^admin-home/', views.topic_manage),  # 帖子管理，也是主页面
     url(r'^kind-manage/', views.kind_manage),  # 板块管理
