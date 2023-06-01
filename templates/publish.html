@@ -37,7 +37,9 @@
 <div class="color-bar-2 color-bg"></div>
 
 
-<h3>发帖</h3>
+<div class="span5 logo" style="width: 250px">
+            <h4 style="font-size: 35px;font-family:'Arial Rounded MT Bold';margin-right: 0px">发帖</h4>
+</div>
 <form accept-charset="UTF-8" action="/publish/" class="publish" id="new_topic" method="post"  enctype="multipart/form-data">
     {% csrf_token %}
     <table width="100%" border="0" cellspacing="0" cellpadding="6">
@@ -50,7 +52,7 @@
         <tr>
             <th>作品标题</th>
             <td>
-                <label>
+                <label style="margin-top: 20px">
                     <input required id="topic_title" maxlength="80" name="t_title" size="60" type="text">
                 </label>
             </td>

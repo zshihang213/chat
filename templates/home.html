@@ -94,7 +94,7 @@
 
         <!-- 左上角图片和logo -->
         <div class="span5 logo" style="width: 250px">
-            <h5 style="font-size: 28px">C h a t . J P G</h5>
+            <h4 style="font-size: 35px;font-family:'Arial Rounded MT Bold';margin-right: 0px">C h a t . J P G</h4>
         </div>
 
         <!-- 导航栏 -->
@@ -173,20 +173,18 @@
     <div class="row headline">
 
         <!-- 生成区 -->
-        <div class="span8">
-            <h3 style="margin-top: -40px;"> 生成区<br/></h3>
-
-                <img id = "gen" decoding="async" src="data:image/png;base64,{{ image_base }}" class="mx-auto d-block " style="width:50%;border-style: groove;"
-                    alt="null">
-
+        <div class="span6">
+            <img id = "gen" decoding="async" src="data:image/png;base64,{{ image_base }}" class="mx-auto d-block " style="width:50%;border-style: groove;"
+                    alt="作品将在此处生成~">
         </div>
 
         <!-- 指导 -->
-        <div class="span4">
-            <h3>欢迎来到Chat.JPG <br/>
-                这是生成页，你可以发挥你的创意</h3>
-            <p class="lead">tip：请输入想要生成的内容</p>
-            <p>（例如：骑着马的宇航员）</p>
+        <div class="span6">
+            <h2 style="line-height:45px;margin-bottom: 30px;margin-bottom: 30px;font-style: italic">欢迎来到Chat.JPG~ <br/>
+                这里是生成页</br>
+                请尽情发挥你的创意！</h2>
+            <p class="lead">tip：请输入想要生成的内容</br>
+                例如：<mark>骑着马的宇航员</mark></p>
             <form action="#" method="post" name="register">
                 {% csrf_token %}
                 <button id="generate" class="btn btn-large" type="submit">尝试生成</button>
