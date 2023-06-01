@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>我的收藏</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
+    <!-- 样式-->
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="/static/css/prettyPhoto.css"/>
+<!--    <link rel="stylesheet" href="css/bootstrap-responsive.css">-->
+<!--    <link rel="stylesheet" href="css/prettyPhoto.css"/>-->
+<!--    <link rel="stylesheet" href="css/flexslider.css"/>-->
     <link rel="stylesheet" href="/static/css/custom-styles.css">
 
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <link rel="stylesheet" href="css/style-ie.css"/>
+    <link rel="stylesheet" href="/static/css/style-ie.css"/>
     <![endif]-->
 
     <!-- Favicons图标 -->
@@ -23,111 +23,79 @@
     <link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-touch-icon-114x114.png">
 
-    <!-- JS -->
+    <!-- js -->
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script src="/static/js/jquery.easing.1.3.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/jquery.prettyPhoto.js"></script>
-    <script src="/static/js/jquery.quicksand.js"></script>
+    <script src="/static/js/jquery.flexslider.js"></script>
     <script src="/static/js/jquery.custom.js"></script>
-
 </head>
 
-<body>
-<!-- 最上面的两条线装饰 -->
+<body class="home">
+<!-- 最上方两个条子 -->
 <div class="color-bar-1"></div>
 <div class="color-bar-2 color-bg"></div>
 
-    <h3 style="text-align: center">收藏夹</h3>
-    <div style="position:relative;left: 250px;">
-        <!-- logo，搜索框，导航栏 -->
-        <div class="row header">
+<!-- logo，搜索框，导航栏 -->
+<div style="background-color: rgba(255,255,255,0.8);position: fixed;width: 100%">
+<div style="margin-left: 30px;margin-top: 10px;margin-bottom: 15px;">
+    <!-- 左上角图片和logo -->
+    <div class="span5 logo" style="width: 250px;margin-left: 20px">
+        <h4 style="font-size: 35px;font-family:'Arial Rounded MT Bold';margin-right: 0px">C h a t . J P G</h4>
+    </div>
+    <!-- 搜索框-->
+    <form action="/all-0-0-0" method="post" style="margin-left: 0; width: 300px;" class="span5 logo navbar-form navbar-left">
+        {% csrf_token %}
+        <div style="float: left;" class="form-group">
+            <input name="keys" type="text" class="form-control" placeholder="请输入搜索内容">
+        </div>
+        <button style="margin-top: 4px; margin-left: 10px" type="submit" class="btn btn-default">搜索</button>
+    </form>
 
-            <!-- 左上角图片和logo -->
-            <div class="span5 logo" style="width: 250px;left: 600px;">
-                <h5 style="font-size: 28px">C h a t . J P G</h5>
-            </div>
+   <!-- 导航栏 -->
+    <div class="span7 navigation">
+        <div class="navbar hidden-phone" style="height: 40px;">
 
-            <!-- 导航栏 -->
-            <div class="span7 navigation">
-                <div class="navbar hidden-phone" style="height: 40px;">
-
-                    <ul class="nav">
-                        <li><a href="/home">主页</a></li>
-                        <li><a href="/publish">发帖</a></li>
-                        <li class="dropdown active">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="page-full-width.htm">看帖 <b
-                                    class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/all-0-0-0">全部帖子</a></li>
-                                <li><a href="/all-1-0-0">风景</a></li>
-                                <li><a href="/all-2-0-0">人物</a></li>
-                                <li><a href="/all-3-0-0">动物</a></li>
-                                <li><a href="/all-4-0-0">幻想</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">{{ uid }}个人中心<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                            <li><a href="/edit-pwd">修改密码</a></li>
-                                <li><a href="/edit-inform">修改个人信息</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="/login">退出</a></li>
-
+            <ul class="nav">
+                <li class="active"><a href="/home">主页</a></li>
+                <li><a href="/publish">发帖</a>&nbsp;</li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">看帖 <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/all-0-0-0">全部帖子</a></li>
+                        {% for kind in kinds %}
+                            <li><a href="/all-{{ kind.id }}-0-0">{{ kind.k_name }}</a></li>
+                        {% endfor %}
                     </ul>
-                </div>
-                <!-- Mobile Nav -->
-            <form action="#" id="mobile-nav" class="visible-phone">
-                <div class="mobile-nav-select">
-                    <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
-                        <option value="">导航栏</option>
-                        <option value="index.htm">主页</option>
-                        <option value="index.htm">- 全显示</option>
-                        <option value="index-gallery.htm">- 只显示帖子列表</option>
-                        <option value="index-slider.htm">- 只显示轮播图</option>
-                        <option value="features.htm">选项1</option>
-                        <option value="page-full-width.htm">页面</option>
-                        <option value="page-full-width.htm">- 全显示</option>
-                        <option value="page-right-sidebar.htm">- 右边</option>
-                        <option value="page-left-sidebar.htm">- 左边</option>
-                        <option value="page-double-sidebar.htm">- 双边</option>
-                        <option value="page-contact.htm">联系我们</option>
-                    </select>
-                </div>
-            </form>
+                </li>
 
-            </div>
-
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">个人中心<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="/edit-pwd">修改密码</a></li>
+                        <li><a href="/edit-inform">修改个人信息</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-
     </div>
 </div>
 </div>
+<!-- 3个结束 -->
 
-<div class="container"; >
-
-    <div style="border-bottom: 1px solid #e7e7e7;padding-bottom: 12px;zoom: 1;position: relative;left: 150px;right: 250px;">
-        <div style="position: relative;margin-right: 10px;cursor: pointer;float: left;">
-            <a href="/single/{id}"><img src="{photo}" style="width:220px;height:150px;"></a>
-            <div style="position: absolute;width: 100%;height: 100%;top: 0;right: 0;z-index:999;">
-            </div>
-        </div>
-        <div style="position: relative;left: 20px;">
-            <div style="font-size: 14px;color: #212121;line-height: 24px;margin-bottom: 20px;cursor: pointer; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><a href="/single/{id}">标题：{title}</a></div>
-            <div style="font-size: 12px;color: #999;margin-bottom: 20px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">内容：{content}</div>
-            <div style="font-size: 12px;color: #999;margin-bottom: 20px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">介绍：{introduce}</div>
-            <div style="top: 200px;">作品序号：{id}</div>
-        </div>
-
-    </div>
-    <div > &nbsp </div>
-    <div > &nbsp </div>
-
+<div style="margin-top: 10%;margin-left: 50px;justify-content: space-between;flex-wrap: wrap;">
+<div   class="row clearfix">
+    <ul class="gallery-post-grid holder">
+        {% for vo in favorite_list %}
+        <li class="span3 gallery-item" data-id="id-1" data-type="illustration">
+            <a href="/single/{{ vo.c_tid }}"><img src="{{ vo.c_tphoto }}" alt="Gallery" ></a>
+            <span class="project-details"><a href="/single/{{ vo.c_tid }}">{{ vo.c_ttitle }}</a>{{ vo.c_tintroduce }}</span>
+        </li>
+        {% endfor %}
+    </ul>
 </div>
-
+</div>
 <!-- 结尾部分 -->
 <div class="footer-container">
     <div class="container">
@@ -151,162 +119,5 @@
 
 <!-- 回到顶端 -->
 <div id="toTop" class="hidden-phone hidden-tablet">回到顶端</div>
-
-
-<script>
-    const zbRepeat = function () {
-        this.htmlToNode = function (html) {
-            let div = document.createElement('div');
-            div.innerHTML = html;
-            return div.firstElementChild;
-        }
-
-        /**
-         * @param node HTML DOM节点, 注意不是string
-         * @param arr json数组 注意是数组类型
-         * @return string 返回HTML字符串, 注意不是DOM节点
-         */
-        this.repeatNode = function (node, arr) {
-            console.log(node.outerHTML);
-            let out = [];
-            for (let i = 0; i < arr.length; i++) {
-                let tmp = node.outerHTML;
-                tmp = tmp.replace(/\s/g, ' '); //去掉回车换行, 减少空白符
-                let map = arr[i];
-
-                //先渲染内层的数组
-                for (let j in map) {
-                    if (map[j] instanceof Array) { //数组, 递归替换
-                        let subNode = node.querySelector('.' + j);
-                        if (subNode) {
-                            let subHtml = this.repeatNode(subNode, map[j]); //递归
-                            let subTpl = subNode.outerHTML.replace(/\s/g, ' ');
-                            tmp = tmp.replace(subTpl, subHtml);
-                        }
-                    }
-                }
-
-                //再渲染内层的对象
-                for (let j in map) {
-                    if (map[j] instanceof Object && !(map[j] instanceof Array)) { //对象, 递归替换
-                        let subNode = node.querySelector('.' + j);
-                        if (subNode) {
-                            let subHtml = this.repeatNode(subNode, [map[j]]); //递归
-                            let subTpl = subNode.outerHTML.replace(/\s/g, ' ')
-                            tmp = tmp.replace(subTpl, subHtml);
-                        }
-                    }
-                }
-
-                //最后渲染外层的键值对/字符串
-                for (let j in map) {
-                    if (typeof map[j] === 'string' || typeof map[j] === 'number') { //字符串, 直接替换
-                        let re = new RegExp('{' + j + '}', 'g');
-                        tmp = tmp.replace(re, map[j]);
-                    }
-                }
-
-                out.push(tmp);
-            }
-
-            return out.join('');
-        }
-
-        //替换字符串
-        this.repeatString = function (tplDom, arr, func = null) {
-            if (tplDom.length === 0) {
-                console.log('字符串长度为空');
-                return;
-            }
-
-            if (arr.length === 0) {
-                console.log('数据为空');
-                return tplDom;
-            }
-
-            let tpl = tplDom;
-            let out = '';
-            for (let i = 0; i < arr.length; i++) {
-                if (typeof func === 'function') {
-                    arr[i] = func(arr[i]);
-                }
-                let map = arr[i];
-                let tmp = tpl;
-                for (let j in map) {
-                    let re = new RegExp('{' + j + '}', 'g');
-                    tmp = tmp.replace(re, map[j]);
-                }
-
-                let re = new RegExp('{_idx}', 'g');
-                tmp = tmp.replace(re, parseInt(i) + 1);
-
-                out += tmp;
-            }
-
-            return out;
-        };
-
-        //替换dom内层html内容
-        this.repeatInnerHTML = function (selector, arr, func = null) {
-            let tplDom = document.querySelector(selector);
-            if (!tplDom) {
-                console.log('未找到: ' + selector);
-                return;
-            }
-
-            tplDom.innerHTML = this.repeatString(tplDom.innerHTML, arr, func);
-        }
-
-        //替换dom
-        this.repeatOuterHTML = function (selector, arr, func = null) {
-            let tplDom = document.querySelector(selector);
-            if (!tplDom) {
-                console.log('未找到: ' + selector);
-                return;
-            }
-
-            tplDom.outerHTML = this.repeatString(tplDom.outerHTML, arr, func);
-        };
-    }
-
-    /**
-     //展示效果
-     let repeat = new zbRepeat();
-     let json_list = [{name:'张三', age:18, fav:1},{name:'李四', age:18, fav:2},{name:'王五', age:18, fav:3},{name:'赵六', age:18, fav:4}];
-
-     //循环innerHTML
-     repeat.repeatInnerHTML('#tpl_repeat_inner', json_list);
-
-     //循环outerHTML
-     function maping(obj) {
-        let fav = '';
-        switch (obj.fav) {
-            case 1: fav = '篮球'; break;
-            case 2: fav = '足球'; break;
-            case 3: fav = '地球'; break;
-            default: fav = '语文';break;
-        }
-        obj.fav = fav;
-        return obj;
-    }
-     repeat.repeatOuterHTML('.tpl_repeat_outer', json_list, maping);
-
-     //循环嵌套HTML
-     let json_nest_list = [{"aa":"aa","bb":"bb","mm":"1","cc":[{"n":"n1","v":"v1","mm":"2"},{"n":"n2","v":"v2","mm":"2"},{"n":"n3","v":"v3","mm":"2"}],"dd":{"d1":"d1","d2":"d2","d3":[{"x":"x1","y":"y1","mm":"4"},{"x":"x2","y":"y2","mm":"4"},{"x":"x3","y":"y3","mm":"4"}],"mm":"3"}}];
-     let node = document.getElementById('tpl_repeat_node');
-     let html = repeat.repeatNode(node, json_nest_list);
-     document.getElementById('repeat_node').innerHTML = html;
-
-     */
-
-
-    let container = document.querySelector('.container')
-    const likes = JSON.parse(window.localStorage.getItem('Likes'))
-    let repeat = new zbRepeat()
-    repeat.repeatInnerHTML('.container', likes)
-
-</script>
-
 </body>
-
 </html>
