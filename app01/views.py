@@ -51,8 +51,10 @@ def home(request):
 
         return render(request, 'home.html', response)
     if request.method == 'POST':
-        openai.api_key = "API!!!"
+        openai.api_key = "API记得删掉"
         text = request.POST.get('prompt')
+        if text == "":
+            text = "骑着马的宇航员"
         print(text)
         response = openai.Image.create(
             prompt=text,
@@ -67,8 +69,8 @@ def home(request):
         response = req.get(image_url)
         image = Image.open(BytesIO(response.content))
         encoded_data=base64.b64encode(response.content).decode('utf-8')
-        image.show()
-        return render(request, 'home.html', {'image_base':encoded_data})
+        #image.show()
+        return render(request, 'home.html', {'image_base':encoded_data,'image_url':image_url})
 
 
 # 所有帖子

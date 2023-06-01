@@ -60,21 +60,6 @@
         });
 
     </script>
-    <script type="text/javascript">
-        function downloadImage() {
-
-
-        // 通过选择器获取img元素
-            const img = document.getElementById("gen");
-            // 将图片的src属性作为URL地址
-            const url = img.src;
-            const a = document.createElement('a');
-            const event = new MouseEvent('click');
-            a.download = url; // '下载图片名称'
-        a.href = url;
-        a.dispatchEvent(event) ;//
-    }
-    </script>
     <script>
     $("#generate").click(function() {
         var prompt =  $('#prompt').val();
@@ -83,7 +68,7 @@
             url: window.location.href,
             data: prompt,
         });
-    }
+    });
     </script>
     <style>
         .top10 {
@@ -205,9 +190,10 @@
             <form action="#" method="post" name="register">
                 {% csrf_token %}
                 <button id="generate" class="btn btn-large" type="submit">尝试生成</button>
-                <button class="btn btn-large" type="submit" onclick="downloadImage()">下载</button>
+                <button onclick="downloadImageById('imageId')" type="button">点击下载图片</button>
                 <input id="prompt" name="prompt" type="prompt"
-                       class="input-xxlarge" class="form-control">
+                       class="input-xxlarge" class="form-control" placeholder="骑着马的宇航员">
+                <a href="{{ image_url }}">打开图片</a>
             </form>
         </div>
     </div>
@@ -267,6 +253,27 @@
 
 <!-- 回到顶端 -->
 <div id="toTop" class="hidden-phone hidden-tablet">回到顶端</div>
+
+<script>
+  function downloadImageById(elementId) {
+    var imageElement = document.getElementById('gen');
+    if (imageElement) {
+      var imageUrl = imageElement.src;
+      var fileName = 'image.jpg'; // 替换为要保存的文件名
+
+      var anchorElement = document.createElement('a');
+      anchorElement.href = imageUrl;
+      anchorElement.download = fileName;
+      anchorElement.style.display = 'none';
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+      document.body.removeChild(anchorElement);
+    }
+  }
+</script>
+
+
+
 
 </body>
 </html>
