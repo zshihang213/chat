@@ -9,6 +9,7 @@ import openai
 import requests as req
 from PIL import Image
 from io import BytesIO
+import base64
 
 
 # Create your views here.
@@ -50,7 +51,7 @@ def home(request):
 
         return render(request, 'home.html', response)
     if request.method == 'POST':
-        openai.api_key = "删掉"
+        openai.api_key = "API!!!"
         text = request.POST.get('prompt')
         print(text)
         response = openai.Image.create(
@@ -65,8 +66,9 @@ def home(request):
 
         response = req.get(image_url)
         image = Image.open(BytesIO(response.content))
+        encoded_data=base64.b64encode(response.content).decode('utf-8')
         image.show()
-        return render(request, 'home.html', {'image_url': image_url})
+        return render(request, 'home.html', {'image_base':encoded_data})
 
 
 # 所有帖子

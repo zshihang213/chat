@@ -191,7 +191,7 @@
         <div class="span8">
             <h3 style="margin-top: -40px;"> 生成区<br/></h3>
 
-                <img id = "gen" decoding="async" src="../static/img/光晕4.jpg" class="mx-auto d-block " style="width:50%;border-style: groove;"
+                <img id = "gen" decoding="async" src="data:image/png;base64,{{ image_base }}" class="mx-auto d-block " style="width:50%;border-style: groove;"
                     alt="null">
 
         </div>
@@ -208,7 +208,6 @@
                 <button class="btn btn-large" type="submit" onclick="downloadImage()">下载</button>
                 <input id="prompt" name="prompt" type="prompt"
                        class="input-xxlarge" class="form-control">
-                <p>图片链接{{ image_url }}</p>
             </form>
         </div>
     </div>
