@@ -67,35 +67,120 @@
 <div class="color-bar-1"></div>
 <div class="color-bar-2 color-bg"></div>
 
+<!-- logo，搜索框，导航栏 -->
+<div style="background-color: rgba(255,255,255,0.5);position: fixed;width: 100%">
+<div style="margin-left: 30px;margin-top: 10px;margin-bottom: 15px;">
+    <!-- 左上角图片和logo -->
+    <div class="span5 logo" style="width: 250px;margin-left: 40px">
+        <h4 style="font-size: 35px;font-family:'Arial Rounded MT Bold';margin-right: 0px">C h a t . J P G</h4>
+    </div>
 
-<div style="width: 100%;height: 60%;">
-    <div style="width: 300px; height: 100px; margin: 0 auto;margin-top: 15%;margin-bottom: 20%;">
+    <!-- 导航栏 -->
+        <div class="span7 navigation" style="margin-left: 100px">
+            <div class="navbar hidden-phone" style="height: 40px;">
+
+                <ul class="nav">
+                    <li class="active"><a href="/home">主页</a></li>
+                    <li><a href="/publish">发帖</a>&nbsp;</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">看帖 <b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/all-0-0-0">全部帖子</a></li>
+                            {% for kind in kinds %}
+                                <li><a href="/all-{{ kind.id }}-0-0">{{ kind.k_name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    {% if uid %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">{{ uid }}，欢迎你<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            <li><a href="/edit-pwd">修改密码</a></li>
+                                <li><a href="/edit-inform">修改个人信息</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="/login">退出</a></li>
+                    {% else %}
+                        <li><a href="/login">登录</a></li>
+                    {% endif %}
+
+
+                </ul>
+
+            </div>
+
+            <!-- 移动端导航 -->
+            <form action="#" id="mobile-nav" class="visible-phone">
+                <div class="mobile-nav-select">
+                    <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+                        <option value="">导航栏</option>
+                        <option value="/home">主页</option>
+                        <option value="/publish">发帖</option>
+                        <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="page-full-width.htm">看帖 <b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/all-0-0-0">全部帖子</a></li>
+                            <li><a href="/all-1-0-0">风景</a></li>
+                            <li><a href="/all-2-0-0">人物</a></li>
+                            <li><a href="/all-3-0-0">动物</a></li>
+                            <li><a href="/all-4-0-0">幻想</a></li>
+                        </ul>
+                    </li>
+                        {% for kind in kinds %}
+                            <option value="/all-{{ kind.id }}-0-0">- {{ kind.k_name }}</option>
+                        {% endfor %}
+
+                        {% if uid %}
+                        <option value="/login">退出</option>
+                        {% else %}
+                        <option value="/login">登录</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div style="width: 100%;height: 52%;">
+    <div style="width: 500px; height: 100px; margin-left: 400px;margin-top: 15%;margin-bottom: 20%;">
         <div class="span4">
-            <form action="/edit-pwd/" method="post">
+            <form action="/edit-pwd/" method="post" >
                 {% csrf_token %}
-                <div class="input-prepend" style="width: 300px;">
-                    <span class="add-on">更改账号：</span><input style="width: 200px" class="span2" id="uid"
+                <div  style="font-size:16px;color:#666;margin-bottom: 10px;margin-left: 65px;">
+                    <span class="add-on">更改账号：</span>
+                    <input style="width: 200px" class="span2" id="uid"
                                                             size="16" type="text" name="old_pwd"
                                                             disabled="disabled" placeholder="{{ user.uid }}">
                 </div>
-                <div class="input-prepend" style="width: 300px;">
-                    <span class="add-on">原始密码：</span><input style="width: 200px" class="span2" id="old_pwd"
+
+                <div style="font-size:16px;color:#666;width: 300px;margin-bottom: 10px;margin-left: 80px;" >
+                    <span class="add-on">原密码：</span>
+                    <input style="width: 200px" class="span2" id="old_pwd"
                                                             size="16" type="password" name="old_pwd"
-                                                            placeholder="原密码">
+                                                            placeholder="请输入原密码">
                 </div>
-                <div class="input-prepend">
-                    <span class="add-on">新的密码：</span><input style="width: 200px" class="span2" id="pwd"
+                <div style="font-size:16px;color:#666;width: 300px;margin-bottom: 10px;margin-left: 80px;">
+                    <span class="add-on">新密码：</span>
+                    <input style="width: 200px" class="span2" id="pwd"
                                                             size="16" type="password" name="new_pwd1"
-                                                            placeholder="新密码">
+                                                            placeholder="请输入新密码">
                 </div>
-                <div class="input-prepend">
-                    <span class="add-on">确认密码：</span><input style="width: 200px" class="span2" id="pwd2"
+                <div  style="font-size:16px;color:#666;">
+                    <span class="add-on">请再次输入新密码：</span>
+                    <input style="width: 200px" class="span2" id="pwd2"
                                                             size="16" type="password" name="new_pwd2"
-                                                            placeholder="确认密码">
+                                                            placeholder="请再次输入新密码">
                 </div>
             </form>
-                <div style="width: 300px;padding: 20px;margin: 0 auto;">
-                    <button id="login-button" style="margin-right: 20px;margin-left: 20px;" class="btn btn-large"
+                <div style="padding: 20px;margin: 0 auto;">
+                    <button id="login-button" style="margin-right: 20px;margin-left: 80px;" class="btn btn-large"
                             type="submit">提交
                     </button>
                     <button id="cancel-button" style="margin-right: 20px;margin-left: 20px;"
@@ -109,7 +194,7 @@
 
 
 <!-- 结尾部分 -->
-<div class="footer-container" style="height: 20%;">
+<div class="footer-container" style="height:18%;">
     <div class="container">
         <div style="margin-top: 30px" class="row">
             <div class="span12 footer-col footer-sub">
@@ -118,9 +203,7 @@
                     </div>
                     <div class="span6">
                             <span class="right">
-                            <a href="#">主页</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">选项1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">页面</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">联系我们</a>
+                            <a href="#">主页</a>&nbsp;&nbsp;&nbsp
                             </span>
                     </div>
                 </div>
