@@ -67,41 +67,116 @@
 <div class="color-bar-1"></div>
 <div class="color-bar-2 color-bg"></div>
 
+<!-- logo，搜索框，导航栏 -->
+<div style="background-color: rgba(255,255,255,0.5);position: fixed;width: 100%">
+<div style="margin-left: 30px;margin-top: 10px;margin-bottom: 15px;">
+    <!-- 左上角图片和logo -->
+    <div class="span5 logo" style="width: 250px;margin-left: 40px">
+        <h4 style="font-size: 35px;font-family:'Arial Rounded MT Bold';margin-right: 0px">C h a t . J P G</h4>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="span7 navigation" style="width: 300px;float: right;margin-right: 120px;">
+        <div class="navbar hidden-phone" style="height: 40px;width: 360px;">
+
+            <ul class="nav">
+                <li><a href="/home">主页</a></li>
+                <li><a href="/publish">发帖</a></li>
+                <li class="dropdown active">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="page-full-width.htm">看帖 <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/all-0-0-0">全部帖子</a></li>
+                        <li><a href="/all-1-0-0">风景</a></li>
+                        <li><a href="/all-2-0-0">人物</a></li>
+                        <li><a href="/all-3-0-0">动物</a></li>
+                        <li><a href="/all-4-0-0">幻想</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">个人中心<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="/edit-pwd">修改密码</a></li>
+                        <li><a href="/edit-inform">修改个人信息</a></li>
+                    </ul>
+                </li>
+                <li><a href="/likes">收藏夹</a></li>
+
+            </ul>
+
+        </div>
+
+        <!-- Mobile Nav -->
+        <form action="#" id="mobile-nav" class="visible-phone">
+            <div class="mobile-nav-select">
+                <select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+                    <option value="">导航栏</option>
+                    <option value="index.htm">主页</option>
+                    <option value="index.htm">- 全显示</option>
+                    <option value="index-gallery.htm">- 只显示帖子列表</option>
+                    <option value="index-slider.htm">- 只显示轮播图</option>
+                    <option value="features.htm">选项1</option>
+                    <option value="page-full-width.htm">页面</option>
+                    <option value="page-full-width.htm">- 全显示</option>
+                    <option value="page-right-sidebar.htm">- 右边</option>
+                    <option value="page-left-sidebar.htm">- 左边</option>
+                    <option value="page-double-sidebar.htm">- 双边</option>
+                    <option value="page-contact.htm">联系我们</option>
+                </select>
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
 
 <div style="width: 100%;height: 60%;">
-    <div style="width: 300px; height: 100px; margin: 0 auto;margin-top: 15%;margin-bottom: 20%;">
-        <div class="span4">
+    <div style="width: 300px; margin-left: 100px;margin-top: 15%;float: left;width:350px;height:85%;overflow: hidden;">
+        <div class="span4" style="margin-left: 90px">
             <form action="/edit-inform/" method="post" name="register">
                 {% csrf_token %}
-                <div class="input-prepend" style="width: 300px;">
-                    <span class="add-on">账号：</span><input style="width: 200px" class="span2" id="uid"
+                <div  style="width: 200px;">
+                    <span class="add-on" style="font-size:16px;color:#666;">账号：</span>
+                    <p>  </p>
+                    <input style="width: 200px;text-align: center" class="span2" id="uid"
                                                             size="16" type="text" name="uid"
                                                             disabled="disabled" placeholder="{{ user.uid }}">
-                </div>
-                <div class="input-prepend" style="width: 300px;">
-                    <span class="add-on">性别：</span><input style="width: 200px" class="span2" id="gender"
+                </div><br>
+                <div  style="width: 200px;">
+                    <span class="add-on" style="font-size:16px;color:#666;">性别：</span>
+                    <p>  </p>
+                    <input style="width: 200px;text-align: center" class="span2" id="gender"
                                                             size="16" type="gender" name="gender"
                                                             placeholder={{ user.gender }}>
                 </div>
-                <div class="input-prepend">
-                    <span class="add-on">个人描述：</span><input style="width: 200px" class="span2" id="description"
-                                                            size="16" type="description" name="description"
-                                                            placeholder={{ user.description }}>
-                </div>
             </form>
-            <div style="width: 300px;padding: 20px;margin: 0 auto;">
-                <button id="login-button" style="margin-right: 20px;margin-left: 20px;" class="btn btn-large"
-                        type="submit">提交
-                </button>
-                <button id="cancel-button" style="margin-right: 20px;margin-left: 20px;"
-                        class="btn btn-large btn-inverse"
-                        type="button">取消
-                </button>
-            </div>
         </div>
     </div>
-</div>
 
+    <div class="span4" style="margin-top: 12%">
+        <form action="/edit-inform/" method="post" name="register">
+            {% csrf_token %}
+            <div style="width: 250px;margin-left:200px;">
+                <span class="add-on" style="font-size:16px;color:#666;">个人简介：</span><br>
+                <p>  </p>
+                <input style="width: 340px;text-align: center;height: 160px;" class="span2" id="description"
+                                                        size="16" type="description" name="description"
+                                                        placeholder={{ user.description }}>
+            </div>
+        </form>
+
+        <div style="width: 300px;padding: 20px;float: left;width:650px;margin-top:10%">
+            <button id="login-button" style="margin-right: 20px;margin-left: 20px;" class="btn btn-large"
+                    type="submit">提交
+            </button>
+            <button id="cancel-button" style="margin-right: 20px;margin-left: 20px;"
+                    class="btn btn-large btn-inverse"
+                    type="button">取消
+            </button>
+        </div>
+
+    </div>
+</div>
 
 <!-- 结尾部分 -->
 <div class="footer-container" style="height: 20%;">
@@ -113,9 +188,7 @@
                     </div>
                     <div class="span6">
                             <span class="right">
-                            <a href="#">主页</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#">选项1</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">页面</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-                                    href="#">联系我们</a>
+                            <a href="#">主页</a>&nbsp;&nbsp
                             </span>
                     </div>
                 </div>
