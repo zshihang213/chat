@@ -60,6 +60,16 @@
         });
 
     </script>
+    <script>
+    $("#generate").click(function() {
+        var prompt =  $('#prompt').val();
+        $.ajax({
+            type: "GET",
+            url: window.location.href,
+            data: prompt,
+        });
+    });
+    </script>
     <style>
         .top10 {
             font-size: 15px;
@@ -163,25 +173,28 @@
     <div class="row headline">
 
         <!-- 生成区 -->
-        <div class="span6" style="padding-bottom: 100px">
-            <img id = "gen" decoding="async" src="data:image/png;base64,{{ image_base }}" class="mx-auto d-block " style="width:75%;border-style: groove;"
-                    alt="作品将在此处生成~" onerror="javascript:this.src='../static/img/horse.png'">
+        <div class="span8">
+            <h3 style="margin-top: -40px;"> 生成区<br/></h3>
+
+                <img id = "gen" decoding="async" src="data:image/png;base64,{{ image_base }}" class="mx-auto d-block " style="width:75%;border-style: groove;"
+                    alt="null" onerror="javascript:this.src='../static/img/horse.png'">
+
         </div>
 
         <!-- 指导 -->
-        <div class="span6" style="padding-bottom: 100px">
+        <div class="span4">
             <h2 style="line-height:45px;margin-bottom: 40px;line-height:50px;font-style: italic">欢迎来到Chat.JPG~ <br/>
                 这里是生成页</br>
                 请尽情发挥你的创意！</h2>
-            <p class="lead" style="margin-bottom: 40px;">tip：请输入想要生成的内容</br>
-                例如：<mark>骑着马的宇航员</mark></p>
+                <p class="lead" style="margin-bottom: 40px;">t提示：请输入想要生成的内容</br>
+            <p>（例如：骑着马的宇航员）</p>
             <form action="#" method="post" name="register">
                 {% csrf_token %}
-                <input id="prompt" name="prompt" type="prompt"
-                       class="input-xxlarge" class="form-control" placeholder="骑着马的宇航员"></form>
-                <button id="generate" class="btn btn-large" type="submit" >尝试生成</button>
+                <button id="generate" class="btn btn-large" type="submit">尝试生成</button>
                 <button onclick="downloadImageById('imageId')" type="button" class="btn btn-large">点击下载图片</button>
-                <a href="{{ image_url }}" >打开图片</a>
+                <input id="prompt" name="prompt" type="prompt"
+                       class="input-xxlarge" class="form-control" placeholder="骑着马的宇航员">
+                <a href="{{ image_url }}">打开图片</a>
             </form>
         </div>
     </div>
@@ -260,47 +273,6 @@
   }
 </script>
 
-
-<script>
-    function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-$(document).ready(function () {
-    $("#generate").click(function (event) {
-        event.preventDefault(); // 阻止表单的默认提交行为
-
-        var prompt = $('#prompt').val();
-        var csrfToken = getCookie('csrftoken');
-
-        $.ajax({
-            type: "POST",
-            url: window.location.href,
-            data: {
-                'prompt': prompt,
-                'csrfmiddlewaretoken': csrfToken
-            },
-            success: function (response) {
-                // 处理成功响应
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                // 处理错误
-            }
-        });
-    });
-});
-
-</script>
 
 
 

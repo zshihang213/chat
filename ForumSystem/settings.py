@@ -89,7 +89,7 @@ DATABASES = {
         'HOST': '',
         'NAME': 'chat',    #你的数据库名称
         'USER': 'root',   #你的数据库用户名
-        'PASSWORD': 'Zsh!725020103',
+        'PASSWORD': 'Jcxxx20020317.',
         'PORT': '3306',
     }
 }
