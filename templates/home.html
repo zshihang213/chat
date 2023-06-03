@@ -60,16 +60,6 @@
         });
 
     </script>
-    <script>
-    $("#generate").click(function() {
-        var prompt =  $('#prompt').val();
-        $.ajax({
-            type: "GET",
-            url: window.location.href,
-            data: prompt,
-        });
-    });
-    </script>
     <style>
         .top10 {
             font-size: 15px;
@@ -270,6 +260,47 @@
   }
 </script>
 
+
+<script>
+    function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+$(document).ready(function () {
+    $("#generate").click(function (event) {
+        event.preventDefault(); // 阻止表单的默认提交行为
+
+        var prompt = $('#prompt').val();
+        var csrfToken = getCookie('csrftoken');
+
+        $.ajax({
+            type: "POST",
+            url: window.location.href,
+            data: {
+                'prompt': prompt,
+                'csrfmiddlewaretoken': csrfToken
+            },
+            success: function (response) {
+                // 处理成功响应
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                // 处理错误
+            }
+        });
+    });
+});
+
+</script>
 
 
 

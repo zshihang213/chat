@@ -51,7 +51,8 @@ def home(request):
 
         return render(request, 'home.html', response)
     if request.method == 'POST':
-        openai.api_key = "api删掉"
+        print("*********************POST")
+        openai.api_key = "api"
         text = request.POST.get('prompt')
         if text == "":
             text = "骑着马的宇航员"
