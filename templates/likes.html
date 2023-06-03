@@ -38,69 +38,70 @@
 
 <!-- logo，搜索框，导航栏 -->
 <div style="background: #fff;box-shadow:0 0 0 1px #eee;border-radius: 0 0 4px 4px;width: 90%;height: 20%; margin: 0 auto;position: relative;">
-<div style="margin-left: 30px;margin-bottom: 15px;">
-    <!-- 左上角图片和logo -->
-    <div class="span5 logo" style="width: 250px;">
-        <h4 style="font-size: 35px;font-family:'Arial Rounded MT Bold';margin-right: 0px">C h a t . J P G</h4>
+    <div style="margin-left: 30px;margin-bottom: 15px;">
+        <!-- 左上角图片和logo -->
+        <div class="span5 logo" style="width: 250px;">
+            <h4 style="font-size: 35px;font-family:'Arial Rounded MT Bold';margin-right: 0px">C h a t . J P G</h4>
+        </div>
+
+        <!-- 搜索框-->
+        <form action="/all-0-0-0" method="post" style="margin-left: 40px; width: 300px;background-color: #ffffff;box-shadow:0 0 0 1px #eee;border-radius: 8px 8px 8px 8px;" class="span5 logo navbar-form navbar-left">
+        {% csrf_token %}
+        <div style="float: left;" class="form-group">
+            <input  name="keys" type="text" class="form-control" style="border-color: #ffffff;border-radius: 8px 8px 8px 8px;height: 25px;width: 200px;margin: 0 auto;position: relative;" placeholder="请输入搜索内容">
+        </div>
+        <button style="margin-top: 3px; margin-left: 5px;width: 75px;background-color: #FFFFFF;border-color: #FFFFFF" type="submit" class="btn btn-default">搜索</button>
+        </form>
+
+       <!-- 导航栏 -->
+        <div class="navbar hidden-phone" style="height: 10px;">
+
+            <ul class="nav" style="margin-top: 35px;margin-left: 80px;">
+                <li ><a href="/home"><img src="../static/img/home.png" style="height: 20px;width: 20px">主页</a></li>
+                <li><a href="/publish"><img src="../static/img/publish.png" style="height: 20px;width: 20px">发帖</a>&nbsp;</li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="../static/img/scan.png" style="height: 20px;width: 20px">看帖 <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/all-0-0-0">全部帖子</a></li>
+                        {% for kind in kinds %}
+                            <li><a href="/all-{{ kind.id }}-0-0">{{ kind.k_name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><img src="../static/img/self-inform.png" style="height: 20px;width: 20px">个人中心<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="/edit-pwd">修改密码</a></li>
+                        <li><a href="/edit-inform">修改个人信息</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
+    <!-- 3个结束 -->
 
-    <!-- 搜索框-->
-    <form action="/all-0-0-0" method="post" style="margin-left: 40px; width: 300px;background-color: #ffffff;box-shadow:0 0 0 1px #eee;border-radius: 8px 8px 8px 8px;" class="span5 logo navbar-form navbar-left">
-    {% csrf_token %}
-    <div style="float: left;" class="form-group">
-        <input  name="keys" type="text" class="form-control" style="border-color: #ffffff;border-radius: 8px 8px 8px 8px;height: 25px;width: 200px;margin: 0 auto;position: relative;" placeholder="请输入搜索内容">
-    </div>
-    <button style="margin-top: 3px; margin-left: 5px;width: 75px;background-color: #FFFFFF;border-color: #FFFFFF" type="submit" class="btn btn-default">搜索</button>
-    </form>
-
-   <!-- 导航栏 -->
-    <div class="navbar hidden-phone" style="height: 10px;">
-
-        <ul class="nav" style="margin-top: 35px;margin-left: 80px;">
-            <li ><a href="/home"><img src="../static/img/home.png" style="height: 20px;width: 20px">主页</a></li>
-            <li><a href="/publish"><img src="../static/img/publish.png" style="height: 20px;width: 20px">发帖</a>&nbsp;</li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="../static/img/scan.png" style="height: 20px;width: 20px">看帖 <b
-                        class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="/all-0-0-0">全部帖子</a></li>
-                    {% for kind in kinds %}
-                        <li><a href="/all-{{ kind.id }}-0-0">{{ kind.k_name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </li>
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown"><img src="../static/img/self-inform.png" style="height: 20px;width: 20px">个人中心<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                <li><a href="/edit-pwd">修改密码</a></li>
-                    <li><a href="/edit-inform">修改个人信息</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- 3个结束 -->
-
-<!-- 收藏夹内容 -->
-<div style="min-height: 500px;height:fit-content;background: #fff;box-shadow:0 0 0 1px #eee;border-radius: 0 0 4px 4px;margin-top: 11%;">
-    <div style="margin-top: 10%;margin-left: 60px;justify-content: space-between;flex-wrap: wrap;flex-direction: row;padding-bottom: 100px">
-    <div   class="row clearfix">
-        <ul class="gallery-post-grid holder">
-            {% for vo in favorite_list %}
-            <li class="span3 gallery-item" data-id="id-1" data-type="illustration" style="height:200px;width: 190px;">
-                <a href="/single/{{ vo.c_tid }}"><img src="{{ vo.c_tphoto }}" alt="Gallery" style="border-radius: 8px 8px 0 0;height: 150px;width: 180px;" ></a>
-                <span class="project-details" style="width: 160px;border-radius: 0 0 8px 8px ;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"><a href="/single/{{ vo.c_tid }}">{{ vo.c_ttitle }}</a>{{ vo.c_tintroduce }}</span>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+    <!-- 收藏夹内容 -->
+    <div style="min-height: 500px;height:fit-content;background: #fff;box-shadow:0 0 0 1px #eee;border-radius: 0 0 4px 4px;margin-top: 11%;">
+        <div style="margin-top: 10%;margin-left: 60px;justify-content: space-between;flex-wrap: wrap;flex-direction: row;">
+        <div   class="row clearfix">
+            <ul class="gallery-post-grid holder">
+                {% for vo in favorite_list %}
+                <li class="span3 gallery-item" data-id="id-1" data-type="illustration" style="height:200px;width: 190px;">
+                    <a href="/single/{{ vo.c_tid }}"><img src="{{ vo.c_tphoto }}" alt="Gallery" style="border-radius: 8px 8px 0 0;height: 150px;width: 180px;" ></a>
+                    <span class="project-details" style="width: 160px;border-radius: 0 0 8px 8px ;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"><a href="/single/{{ vo.c_tid }}">{{ vo.c_ttitle }}</a>{{ vo.c_tintroduce }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        </div>
     </div>
 </div>
 
 <!-- 结尾部分 -->
-<div class="footer-container" style="position: absolute;margin-bottom: 0px;margin-top: 12px">
-    <div class="container">
+<div class="footer-container" style="position: relative;bottom: 0;width: 90%;margin: 0 auto;">
+    <div class="container" style="">
         <div style="margin-top: 30px" class="row">
             <div class="span12 footer-col footer-sub">
                 <div class="row no-margin">
@@ -114,13 +115,12 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <!-- 尾部结束 -->
 
-<!-- 回到顶端 -->
-<div id="toTop" class="hidden-phone hidden-tablet">回到顶端</div>
-</div>
+    <!-- 回到顶端 -->
+    <div id="toTop" class="hidden-phone hidden-tablet">回到顶端</div>
+
 </body>
 </html>
