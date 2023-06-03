@@ -156,7 +156,7 @@
                 <div  style="font-size:16px;color:#666;margin-bottom: 10px;margin-left: 65px;">
                     <span class="add-on">更改账号：</span>
                     <input style="width: 200px" class="span2" id="uid"
-                                                            size="16" type="text" name="old_pwd"
+                                                            size="16" type="text" name="uid"
                                                             disabled="disabled" placeholder="{{ user.uid }}">
                 </div>
 
@@ -168,13 +168,13 @@
                 </div>
                 <div style="font-size:16px;color:#666;width: 300px;margin-bottom: 10px;margin-left: 80px;">
                     <span class="add-on">新密码：</span>
-                    <input style="width: 200px" class="span2" id="pwd"
+                    <input style="width: 200px" class="span2" id="new_pwd1"
                                                             size="16" type="password" name="new_pwd1"
                                                             placeholder="请输入新密码">
                 </div>
                 <div  style="font-size:16px;color:#666;">
                     <span class="add-on">请再次输入新密码：</span>
-                    <input style="width: 200px" class="span2" id="pwd2"
+                    <input style="width: 200px" class="span2" id="new_pwd2"
                                                             size="16" type="password" name="new_pwd2"
                                                             placeholder="请再次输入新密码">
                 </div>
@@ -221,24 +221,26 @@
     $('#login-button').click(function () {
         var uid = $('#uid').val();
         var pwd = $('#pwd').val();
+        var old_pwd = $('#old_pwd').val();
+        var new_pwd1 = $('#new_pwd1').val();
+        var new_pwd2 = $('#new_pwd2').val();
         $.ajax({
             url: window.location.href,
             type: "POST",
-            data: {'type': 'login', 'uid': uid, 'pwd': pwd},
+            data: {'type': 'login', 'uid': uid, 'pwd': pwd, 'old_pwd':old_pwd,'new_pwd1':new_pwd1,'new_pwd2':new_pwd2},
             beforeSend: function (xhr, settings) {
                 xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");    // csrf
             },
             success: function (data) {
-                // data是服务器端返回的字符串
-                var dic = JSON.parse(data)
-                var pwd = document.getElementById('old_pwd');
-                if (dic.pwd == pwd.value) {
-                    window.location.href = "/home";
-                }
-                else {
+                var dic = JSON.parse(data);
+                if (dic.status) {
                     alert(dic.msg);
-                    window.location.href="/edit-pwd";
+                    window.location.href = "/home";
+                }else {
+                    alert(dic.msg);
+                    window.location.href = "/edit-pwd";
                 }
+
             }
         });
     });

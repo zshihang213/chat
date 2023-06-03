@@ -205,19 +205,20 @@
 <script>
     $('#login-button').click(function () {
        var uid = $('#uid').val();
-       var pwd = $('#pwd').val();
+       var gender = $('#gender').val();
+       var description = $('#description').val();
        $.ajax({
             url: window.location.href,
             type: "POST",
-            data: {'type': 'login','uid': uid, 'pwd': pwd},
+            data: {'type': 'login','uid': uid, 'gender': gender,'description':description},
             beforeSend: function (xhr, settings) {
                 xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");    // csrf
             },
             success: function (data) {
                 // data是服务器端返回的字符串
-                var gender = document.getElementById('gender');
                 var dic = JSON.parse(data);
-                if (gender.value=="男" || gender.value=="女"||gender.value=="") {
+                if (dic.status) {
+                    alert('修改成功');
                     window.location.href="/home";
                 }
                 else {

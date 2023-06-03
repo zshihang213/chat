@@ -357,21 +357,22 @@ def single(request, tid):
 def edit_pwd(request):
     if request.method == 'GET':
         uid = request.session.get('uid')
-        return render(request, 'edit-pwd.html', {'uid': uid})
+        return render(request, 'edit-pwd.html', {'user': models.User.objects.filter(uid=uid).all()[0]})
 
     if request.method == 'POST':
         uid = request.session.get('uid')
         old = request.POST.get('old_pwd')
         new1 = request.POST.get('new_pwd1')
         new2 = request.POST.get('new_pwd2')
-
         response = {'msg': '', 'status': True}
+        print("new1:",new1)
         if new1 == new2 and len(models.User.objects.filter(uid=uid, password=old)) != 0:
             # 核对成功，修改密码
             response['status'] = True
             HttpResponse(json.dumps(response))
             models.User.objects.filter(uid=uid).update(password=new1)
-            return redirect('/home')
+            response['msg'] = '修改成功'
+            return HttpResponse(json.dumps(response))
         else:
             response['status'] = False
             response['msg'] = '原密码错误'
@@ -389,11 +390,12 @@ def edit_inform(request):
         description = request.POST.get('description')
 
         response = {'msg': '', 'status': True}
-        if gender == '男' or gender == '女':
+        if gender == '男' or gender == '女' or gender == '':
             response['status'] = True
             if description != '':
                 models.User.objects.filter(uid=uid).update(description=description)
-            models.User.objects.filter(uid=uid).update(gender=gender)
+            if gender != '':
+                models.User.objects.filter(uid=uid).update(gender=gender)
             return HttpResponse(json.dumps(response))
         else:
             response['status'] = False
