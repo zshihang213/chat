@@ -48,12 +48,13 @@ def home(request):
         # 把所有类别装入返回字典里
         kinds = models.Kind.objects.filter()
         response['kinds'] = kinds
+        response['text'] = "骑马的宇航员"
         #response['status'] = 0
 
         return render(request, 'home.html', response)
     if request.method == 'POST':
         print("*********************POST")
-        openai.api_key = "API!!"
+        openai.api_key = "API!!!"
         text = request.POST.get('prompt')
         if text == "":
             text = "骑着马的宇航员"
@@ -71,7 +72,8 @@ def home(request):
         response = req.get(image_url)
         image = Image.open(BytesIO(response.content))
         image_base=base64.b64encode(response.content).decode('utf-8')
-        return render(request, 'home.html', {'image_base':image_base,'image_url':image_url})
+        return render(request, 'home.html', {'image_base':image_base,'image_url':image_url,
+                                             'uid':request.session['uid'],'text':text})
 
 
 # 所有帖子
