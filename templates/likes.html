@@ -90,7 +90,7 @@
             {% for vo in favorite_list %}
             <li class="span3 gallery-item" data-id="id-1" data-type="illustration" style="height:200px;width: 190px;">
                 <a href="/single/{{ vo.c_tid }}"><img src="{{ vo.c_tphoto }}" alt="Gallery" style="border-radius: 8px 8px 0 0;height: 150px;width: 180px;" ></a>
-                <span class="project-details" style="width: 160px;border-radius: 0 0 8px 8px ;"><a href="/single/{{ vo.c_tid }}">{{ vo.c_ttitle }}</a>{{ vo.c_tintroduce }}</span>
+                <span class="project-details" style="width: 160px;border-radius: 0 0 8px 8px ;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"><a href="/single/{{ vo.c_tid }}">{{ vo.c_ttitle }}</a>{{ vo.c_tintroduce }}</span>
             </li>
             {% endfor %}
         </ul>
