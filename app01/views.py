@@ -51,7 +51,7 @@ def home(request):
 
         return render(request, 'home.html', response)
     if request.method == 'POST':
-        openai.api_key = "API记得删掉"
+        openai.api_key = "api删掉"
         text = request.POST.get('prompt')
         if text == "":
             text = "骑着马的宇航员"
@@ -168,6 +168,8 @@ def login(request):
         uid = request.POST.get('uid')
         pwd = request.POST.get('pwd')
         if type == 'login':
+            print("uid:",uid)
+            print(pwd)
             if len(models.User.objects.filter(uid=uid, password=pwd)) != 0:
                 # 登录成功
                 response['status'] = True
