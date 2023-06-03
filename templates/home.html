@@ -173,7 +173,7 @@
     <div class="row headline">
 
         <!-- 生成区 -->
-        <div class="span8">
+        <div class="span7">
             <h3 style="margin-top: -40px;"> 生成区<br/></h3>
 
                 <img id = "gen" decoding="async" src="data:image/png;base64,{{ image_base }}" class="mx-auto d-block " style="width:75%;border-style: groove;"
@@ -182,18 +182,18 @@
         </div>
 
         <!-- 指导 -->
-        <div class="span4">
+        <div class="span5">
             <h2 style="line-height:45px;margin-bottom: 40px;line-height:50px;font-style: italic">欢迎来到Chat.JPG~ <br/>
                 这里是生成页</br>
                 请尽情发挥你的创意！</h2>
-                <p class="lead" style="margin-bottom: 40px;">t提示：请输入想要生成的内容</br>
+                <p class="lead" style="margin-bottom: 40px;">提示：请输入想要生成的内容</br>
             <p>（例如：骑着马的宇航员）</p>
             <form action="#" method="post" name="register">
                 {% csrf_token %}
                 <button id="generate" class="btn btn-large" type="submit">尝试生成</button>
                 <button onclick="downloadImageById('imageId')" type="button" class="btn btn-large">点击下载图片</button>
                 <input id="prompt" name="prompt" type="prompt"
-                       class="input-xxlarge" class="form-control" placeholder="骑着马的宇航员">
+                       class="input-xxlarge" class="form-control" placeholder="骑着马的宇航员"></br>
                 <a href="{{ image_url }}">打开图片</a>
             </form>
         </div>
