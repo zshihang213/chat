@@ -22,6 +22,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">欢迎您，管理员</a>
+                        <button id="cancel-button" style="margin-right: 20px;margin-left: 20px;"
+                            class="btn btn-large btn-inverse"
+                            type="button">返回登录界面
+                        </button>
                     </li>
 
                 </ul>
@@ -190,6 +194,10 @@
             }
         });
     }
+
+    $('#cancel-button').click(function () {
+        window.location.href = "/login";
+    });
 
 
 </script>

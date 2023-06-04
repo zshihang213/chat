@@ -570,7 +570,7 @@ p.side {margin-bottom: 20px;}
 / Footer
 **************************************/
 .footer-container {
-	position:absolute;
+	position:relative;
 	bottom:0;
 	width:100%;
 	background:#333;

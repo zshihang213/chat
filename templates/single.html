@@ -86,7 +86,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/all-0-0-0">全部帖子</a></li>
                         {% for kind in kinds %}
-                            <li><a href="/all-{{ kind.id }}-0-0">{{ kind.k_name }}</a></li>
+                                <li><a href="/all-{{ kind.id }}-0-0">{{ kind.k_name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -138,7 +138,7 @@
 
                 <div class="span6">
                     <!-- 图片 -->
-                    <img src="{{ t_photo }}" class="align-left thumbnail" alt="image">
+                    <img src="{{ t_photo }}" class="align-left thumbnail" alt="image" onerror="this.style.display='none'">
                     <!-- 基本信息 -->
                     <ul class="project-info">
                         <li><h6>发布时间:</h6> {{ t_time }}</li>
@@ -193,7 +193,7 @@
 
                                 {% endif %}
                                 <a iddd="{{ r.r_id }}" onclick="deleter(this);" style="float: right;margin-right: 10px">删除</a>
-                                <img style="width: 50px;height: 50px;" src="{{ r.r_photo }}">
+                                <img style="width: 50px;height: 50px;" src="{{ r.r_photo }}" onerror="this.style.display='none'">
                             </li>
                         {% endfor %}
                     </ul>

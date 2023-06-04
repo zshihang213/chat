@@ -240,18 +240,17 @@ def publish(request):
 
         # 存帖子图片
         t_photo = request.FILES.get('t_photo', None)
-        t_photo_path = 'static/img/t_photo/' + str(t_id) + '_' + t_photo.name
-
         if t_photo:
             # 保存文件
+            t_photo_path = 'static/img/t_photo/' + str(t_id) + '_' + t_photo.name
             import os
             f = open(os.path.join(t_photo_path), 'wb')
             for line in t_photo.chunks():
                 f.write(line)
             f.close()
+            models.Topic.objects.filter(id=t_id).update(t_photo='/' + t_photo_path)
 
         # 吧图片路径存入数据库
-        models.Topic.objects.filter(id=t_id).update(t_photo='/'+t_photo_path)
 
         return redirect('/single/' + str(t_id))
 
@@ -275,6 +274,7 @@ def single(request, tid):
         t_introduce = topic.t_introduce
         uid = request.session['uid']
         admin_uid = request.session.get('admin_uid')
+        kinds = models.Kind.objects.filter()
         fs=0
         fav_list = CltNovel.objects.filter(c_uid=uid)
         if fav_list.filter(c_tid=tid):  # 检查有没有该小说id
@@ -294,6 +294,7 @@ def single(request, tid):
             'uid': uid,
             'admin_uid': admin_uid,
             'fav_status':fs,
+            'kinds':kinds,
         }
 
 
