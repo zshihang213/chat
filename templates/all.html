@@ -42,7 +42,7 @@
 <div class="container main-container">
 
     <!-- logo，搜索框，导航栏 -->
-    <div class="row header">
+    <div class="row header" style="width: 100%">
 
         <!-- 左上角图片和logo -->
         <div class="span5 logo" style="width: 250px">
@@ -50,7 +50,7 @@
         </div>
 
         <!-- 搜索框-->
-        <form action="/all-0-0-0" method="post" style="margin-left: 0; width: 350px;" class="span5 logo navbar-form navbar-left">
+        <form action="/all-0-0-0" method="post" style="margin-left: 0; width: 300px;" class="span5 logo navbar-form navbar-left">
             {% csrf_token %}
             <div style="float: left;" class="form-group">
                 <input name="keys" type="text" class="form-control" placeholder="请输入搜索内容">
@@ -59,37 +59,33 @@
         </form>
 
         <!-- 导航栏 -->
-        <div  style="width: 300px;float: right;margin-right:15%;margin-top: 3%">
-            <div class="navbar hidden-phone" style="height: 40px;width: 360px;">
+        <div  style="width: 300px;float: right;margin-right: 15%;margin-top: 3%">
+            <div class="navbar hidden-phone" style="height: 40px;width: 500px;">
 
                 <ul class="nav">
-                    <li><a href="/home"><img src="../static/img/home.png" style="height: 20px;width: 20px">主页</a></li>
-                    <li><a href="/publish"><img src="../static/img/publish.png" style="height: 20px;width: 20px">发帖</a></li>
-                    <li class="dropdown active">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="page-full-width.htm"><img src="../static/img/scan.png" style="height: 20px;width: 20px">看帖 <b
-                                class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                <li ><a href="/home"><img src="http://127.0.0.1:8000/static/img/home.png" style="height: 20px;width: 20px">主页</a></li>
+                <li><a href="/publish"><img src="http://127.0.0.1:8000/static/img/publish.png" style="height: 20px;width: 20px">发帖</a>&nbsp;</li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="http://127.0.0.1:8000/static/img/scan.png" style="height: 20px;width: 20px">看帖 <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
                             <li><a href="/all-0-0-0">全部帖子</a></li>
                             <li><a href="/all-1-0-0">风景</a></li>
                             <li><a href="/all-2-0-0">人物</a></li>
                             <li><a href="/all-3-0-0">动物</a></li>
                             <li><a href="/all-4-0-0">幻想</a></li>
                         </ul>
-                    </li>
-                    {% if uid %}
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown"><img src="../static/img/self-inform.png" style="height: 20px;width: 20px">{{ uid }}，欢迎你<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                            <li><a href="/edit-pwd">修改密码</a></li>
-                                <li><a href="/edit-inform">修改个人信息</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/likes"><img src="../static/img/likes.png" style="height: 20px;width: 20px">收藏夹</a></li>
-                        <li><a href="/login"><img src="../static/img/exit.png" style="height: 20px;width: 20px">退出</a></li>
-                    {% else %}
-                        <li><a href="/login"><img src="../static/img/self-inform.png" style="height: 20px;width: 20px">登录</a></li>
-                    {% endif %}
-                </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><img src="http://127.0.0.1:8000/static/img/self-inform.png" style="height: 20px;width: 20px">个人中心<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="/edit-pwd">修改密码</a></li>
+                        <li><a href="/edit-inform">修改个人信息</a></li>
+                    </ul>
+                </li>
+                <li><a href="/likes"><img src="http://127.0.0.1:8000/static/img/likes.png" style="height: 20px;width: 20px">收藏夹</a></li>
+            </ul>
 
             </div>
 
