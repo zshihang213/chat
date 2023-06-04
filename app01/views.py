@@ -275,6 +275,7 @@ def single(request, tid):
         uid = request.session['uid']
         admin_uid = request.session.get('admin_uid')
         kinds = models.Kind.objects.filter()
+        kname = models.Kind.objects.filter(id=t_kind).all()[0].k_name
         fs=0
         fav_list = CltNovel.objects.filter(c_uid=uid)
         if fav_list.filter(c_tid=tid):  # 检查有没有该小说id
@@ -295,6 +296,7 @@ def single(request, tid):
             'admin_uid': admin_uid,
             'fav_status':fs,
             'kinds':kinds,
+            'kname':kname,
         }
 
 
