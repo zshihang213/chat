@@ -139,50 +139,42 @@
 </div>
 
 <div style="width: 100%;height: 60%;">
-    <div style="width: 300px; margin-left: 210px;margin-top: 15%;float: left;width:350px;height:85%;overflow: hidden;">
-        <div class="span4" style="margin-left: 90px">
-            <form action="/edit-inform/" method="post" name="register">
+    <div style="width: 500px; height: 200px;margin-top: 25%;margin-bottom: 25%;">
+        <div class="span4" style="position: absolute;left: 0;right: 0;top: 30%;bottom: 0;margin: auto;">
+            <form action="/edit-inform/" method="post" name="register" s>
                 {% csrf_token %}
-                <div  style="width: 200px;">
+                <div  style="font-size:16px;color:#666;margin-left: 65px;">
                     <span class="add-on" style="font-size:16px;color:#666;">账号：</span>
-                    <p>  </p>
+
                     <input style="width: 200px;text-align: center" class="span2" id="uid"
                                                             size="16" type="text" name="uid"
                                                             disabled="disabled" placeholder="{{ user.uid }}">
                 </div><br>
-                <div  style="width: 200px;">
+                <div  style="font-size:16px;color:#666;margin-bottom: 20px;margin-left: 65px;">
                     <span class="add-on" style="font-size:16px;color:#666;">性别：</span>
-                    <p>  </p>
                     <input style="width: 200px;text-align: center" class="span2" id="gender"
                                                             size="16" type="gender" name="gender"
                                                             placeholder={{ user.gender }}>
                 </div>
-            </form>
-        </div>
-    </div>
 
-    <div class="span4" style="margin-top: 210px">
-        <form action="/edit-inform/" method="post" name="register">
-            {% csrf_token %}
-            <div style="width: 250px;margin-left:200px;">
-                <span class="add-on" style="font-size:16px;color:#666;">个人简介：</span><br>
-                <p>  </p>
-                <input style="width: 340px;text-align: center;height: 160px;" class="span2" id="description"
+                <span style="font-size:16px;color:#666;margin-bottom: 10px;margin-left: 65px;margin-top:30px" class="add-on" >个人简介：</span><br>
+                <input style="width: 340px;text-align: center;height: 160px;margin-bottom: 10px;margin-left: 65px;" class="span2" id="description"
                                                         size="16" type="description" name="description"
                                                         placeholder={{ user.description }}>
-            </div>
-        </form>
 
-        <div style="width: 300px;padding: 20px;float: left;width:650px;margin-top:10%">
-            <button id="login-button" style="margin-right: 20px;margin-left: 20px;" class="btn btn-large"
+                <div style="margin-top:10px;margin-bottom: 50px;margin-left: 65px;">
+                    <button id="login-button" style="margin-right: 20px;margin-left: 20px;" class="btn btn-large"
                     type="submit">提交
-            </button>
-            <button id="cancel-button" style="margin-right: 20px;margin-left: 20px;"
+                    </button>
+                    <button id="cancel-button" style="margin-right: 20px;margin-left: 20px;"
                     class="btn btn-large btn-inverse"
                     type="button">取消
-            </button>
+                    </button>
+                </div>
+            </form>
+            <form action="/edit-inform/" method="post" name="register"style="position: absolute;left: 0;right: 0;top: 50%;bottom: 0;margin: auto;>
+            {% csrf_token %}
         </div>
-
     </div>
 </div>
 
