@@ -59,7 +59,7 @@
         </form>
 
         <!-- 导航栏 -->
-        <div class="span7 navigation" style="width: 300px;float: right;margin-right: 50px;">
+        <div  style="width: 300px;float: right;margin-right: 50px;margin-top: 2%">
             <div class="navbar hidden-phone" style="height: 40px;width: 360px;">
 
                 <ul class="nav">
@@ -77,6 +77,13 @@
                         </ul>
                     </li>
                     {% if uid %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown"><img src="../static/img/self-inform.png" style="height: 20px;width: 20px">{{ uid }}，欢迎你<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            <li><a href="/edit-pwd">修改密码</a></li>
+                                <li><a href="/edit-inform">修改个人信息</a></li>
+                            </ul>
+                        </li>
                         <li><a href="/likes"><img src="../static/img/likes.png" style="height: 20px;width: 20px">收藏夹</a></li>
                         <li><a href="/login"><img src="../static/img/exit.png" style="height: 20px;width: 20px">退出</a></li>
                     {% else %}
