@@ -57,7 +57,7 @@
 
         <!-- 导航栏 -->
         <div  style="width: 280px;float: right;margin-right: 5%;margin-top: 4%">
-            <div class="navbar hidden-phone" style="height: 40px;width: 360px;">
+            <div class="navbar hidden-phone">
 
                 <ul class="nav">
                     <li><a href="/home"><img src="../static/img/home.png" style="height: 20px;width: 20px">主页</a></li>
@@ -82,8 +82,6 @@
                         </ul>
                     </li>
                     <li><a href="/likes"><img src="../static/img/likes.png" style="height: 20px;width: 20px">收藏夹</a></li>
-                    <li><a href="/login"><img src="http://127.0.0.1:8000/static/img/exit.png" style="height: 20px;width: 20px">退出</a></li>
-
                 </ul>
 
             </div>
@@ -92,7 +90,7 @@
 
     </div>
 
-    <form accept-charset="UTF-8" style="margin-left: 10%" action="/publish/" class="publish" id="new_topic" method="post"  enctype="multipart/form-data">
+    <form accept-charset="UTF-8" style="margin-left: 10%;" action="/publish/" class="publish" id="new_topic" method="post"  enctype="multipart/form-data">
         {% csrf_token %}
         <table width="100%" border="0" cellspacing="0" cellpadding="6">
             <colgroup>
@@ -163,10 +161,11 @@
             </tbody>
         </table>
     </form>
+
 </div>
 
 <!-- 结尾部分 -->
-<div class="footer-container" style="height: 20%;">
+<div class="footer-container">
     <div class="container">
         <div style="margin-top: 30px" class="row">
             <div class="span12 footer-col footer-sub">
@@ -175,7 +174,7 @@
                     </div>
                     <div class="span6">
                             <span class="right">
-                            <a href="http://127.0.0.1:8000/home/">主页</a>&nbsp;&nbsp;
+                            <a href="home">主页</a>&nbsp;&nbsp;
                             </span>
                     </div>
                 </div>
