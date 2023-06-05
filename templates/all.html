@@ -86,7 +86,7 @@
                 <li><a href="/likes"><img src="http://127.0.0.1:8000/static/img/likes.png" style="height: 20px;width: 20px">收藏夹</a></li>
 
             </ul>
-                 <div class="span8">
+                 <div class="span8" style="margin-top: 5%;" >
                     <h3 style="margin-top: -40px;"> &nbsp;&nbsp;TOP 10 公告<br/></h3>
                     {% for a in a_list %}
                         <a href="/single-an-{{ a.a_id }}" class="top10">{{ a.a_title }}</a>
