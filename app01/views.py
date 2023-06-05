@@ -18,19 +18,6 @@ import base64
 def home(request):
     if request.method == 'GET':
         response = {}
-
-        # top 10（公告）的处理，筛选10个也要改
-        announcements = models.Announcement.objects.filter()
-        # 把这10个公告封装成字典
-        a_list = []
-        for a in announcements:
-            dic = {'a_id': a.id, 'a_title': a.a_title}
-            a_list.append(dic)
-        # 把列表装进回复字典里
-        n = 10 if len(a_list) < 10 else len(a_list)
-
-        response['a_list'] = a_list[::-1][0:n-1]
-
         # 帖子推荐列表，推荐8个帖子，推荐8个要改
         recommends = models.Topic.objects.filter(recommend=True)
         # 推荐列表
@@ -54,7 +41,7 @@ def home(request):
         return render(request, 'home.html', response)
     if request.method == 'POST':
         print("*********************POST")
-        openai.api_key = "API!!!"
+        openai.api_key = "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"
         text = request.POST.get('prompt')
         if text == "":
             text = "骑着马的宇航员"
@@ -68,12 +55,13 @@ def home(request):
         print(response)
         image_url = response['data'][0]['url']
         print(image_url)
+        kinds = models.Kind.objects.filter()
 
         response = req.get(image_url)
         image = Image.open(BytesIO(response.content))
         image_base=base64.b64encode(response.content).decode('utf-8')
         return render(request, 'home.html', {'image_base':image_base,'image_url':image_url,
-                                             'uid':request.session['uid'],'text':text})
+                                             'uid':request.session['uid'],'text':text,'kinds':kinds})
 
 
 # 所有帖子
@@ -147,6 +135,20 @@ def all_tie(request, kid, reply_limit, time_limit):
             'reply_limit': reply_limit,
             'uid': uid,
         }
+
+
+        # top 10（公告）的处理，筛选10个也要改
+        announcements = models.Announcement.objects.filter()
+        # 把这10个公告封装成字典
+        a_list = []
+        for a in announcements:
+            dic = {'a_id': a.id, 'a_title': a.a_title}
+            a_list.append(dic)
+        # 把列表装进回复字典里
+        n = 10 if len(a_list) < 10 else len(a_list)
+
+        response['a_list'] = a_list[::-1][0:n-1]
+
         return render(request, 'all.html', response)
 
     elif request.method == 'POST':
